@@ -240,13 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ItemCreate\" />
-    <Folder Include="Views\ItemDelete\" />
-    <Folder Include="Views\ItemDetails\" />
     <Folder Include="Views\Item\" />
-    <Folder Include="Views\StoreCreate\" />
-    <Folder Include="Views\StoreDelete\" />
-    <Folder Include="Views\StoreDetails\" />
     <Folder Include="Views\Store\" />
     <Folder Include="Views\Transaction\" />
   </ItemGroup>
