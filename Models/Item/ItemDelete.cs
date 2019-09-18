@@ -8,6 +8,10 @@ namespace Models.Item
 {
     public class ItemDelete
     {
-
+        public int ItemId { get; set; }
+        public int StoreId { get; set; }
+        public virtual Data.Store Store { get; set; }
+        public string ItemName { get; set; }
+        public string Description { get; set; }
     }
 }
