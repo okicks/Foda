@@ -27,5 +27,8 @@ namespace Data
 
         [Required]
         public int Quantity { get; set; }
+
+        [Required]
+        public Guid OwnerId { get; set; }
     }
 }

@@ -35,5 +35,8 @@ namespace Data
         [Required]
         [Display(Name = "Phone Number")]
         public string StorePhoneNumber { get; set; }
+
+        [Required]
+        public Guid OwnerId { get; set; }
     }
 }

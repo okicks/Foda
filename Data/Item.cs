@@ -25,5 +25,8 @@ namespace Data
 
         [Required]
         public string Description { get; set; }
+
+        [Required]
+        public Guid OwnerId { get; set; }
     }
 }
