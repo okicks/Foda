@@ -24,7 +24,7 @@ namespace Services
                 TransactionId = model.TransactionId,
                 StoreId = model.StoreId,
                 Store = model.Store,
-                TransactionDate = model.TransactionDate,
+                TransactionDate = DateTime.Now,
                 DeliveryStreet = model.DeliveryStreet,
                 DeliveryCity = model.DeliveryCity,
                 DeliveryState = model.DeliveryState,
