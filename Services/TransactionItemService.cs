@@ -37,14 +37,14 @@ namespace Services
             }
         }
 
-        public IEnumerable<TransactionItemList> GetTransactionItems()
+        public IEnumerable<TransactionItemListItem> GetTransactionItems()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx.TransactionItems.Where(e => e.OwnerId == _userId).Select(
                             model =>
-                                new TransactionItemList
+                                new TransactionItemListItem
                                 {
                                     TransactionItemId = model.TransactionItemId,
                                     TransactionId = model.TransactionId,

@@ -58,23 +58,23 @@
     <Compile Include="Item\ItemCreate.cs" />
     <Compile Include="Item\ItemDelete.cs" />
     <Compile Include="Item\ItemDetail.cs" />
-    <Compile Include="Item\ItemList.cs" />
+    <Compile Include="Item\ItemListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Store\StoreCreate.cs" />
     <Compile Include="Store\StoreDelete.cs" />
     <Compile Include="Store\StoreDetail.cs" />
     <Compile Include="Store\StoreEdit.cs" />
-    <Compile Include="Store\StoreList.cs" />
+    <Compile Include="Store\StoreListItem.cs" />
     <Compile Include="TransactionItem\TransactionItemCreate.cs" />
     <Compile Include="TransactionItem\TransactionItemDelete.cs" />
     <Compile Include="TransactionItem\TransactionItemDetail.cs" />
     <Compile Include="TransactionItem\TransactionItemEdit.cs" />
-    <Compile Include="TransactionItem\TransactionItemList.cs" />
+    <Compile Include="TransactionItem\TransactionItemListItem.cs" />
     <Compile Include="Transaction\TransactionCreate.cs" />
     <Compile Include="Transaction\TransactionDelete.cs" />
     <Compile Include="Transaction\TransactionDetail.cs" />
     <Compile Include="Transaction\TransactionEdit.cs" />
-    <Compile Include="Transaction\TransactionList.cs" />
+    <Compile Include="Transaction\TransactionListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -38,14 +38,14 @@ namespace Services
             }
         }
 
-        public IEnumerable<StoreList> GetStores()
+        public IEnumerable<StoreListItem> GetStores()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx.Stores.Where(e => e.OwnerId == _userId).Select(
                             model =>
-                                new StoreList
+                                new StoreListItem
                                 {
                                     StoreId = model.StoreId,
                                     StoreName = model.StoreName,

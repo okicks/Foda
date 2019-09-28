@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.TransactionItem
 {
-    public class TransactionItemList
+    public class TransactionItemListItem
     {
         public int TransactionItemId { get; set; }
         public int TransactionId { get; set; }
