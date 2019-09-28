@@ -28,15 +28,19 @@ namespace WebMVC
             {
 
                 // first we create Admin rool   
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Admin";
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+                {
+                    Name = "Admin"
+                };
                 roleManager.Create(role);
 
                 //Here we create a Admin super user who will maintain the website                  
 
-                var user = new ApplicationUser();
-                user.UserName = "okicks";
-                user.Email = "kicks.oliver@gmail.com";
+                var user = new ApplicationUser
+                {
+                    UserName = "okicks",
+                    Email = "kicks.oliver@gmail.com"
+                };
 
                 string userPWD = "Mia5643";
 
@@ -54,13 +58,17 @@ namespace WebMVC
             {
 
                 // first we create Admin rool   
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "User";
-                roleManager.Create(role);                 
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+                {
+                    Name = "User"
+                };
+                roleManager.Create(role);
 
-                var user = new ApplicationUser();
-                user.UserName = "test";
-                user.Email = "fake@fake.com";
+                var user = new ApplicationUser
+                {
+                    UserName = "test",
+                    Email = "fake@fake.com"
+                };
 
                 string userPWD = "Test1234";
 

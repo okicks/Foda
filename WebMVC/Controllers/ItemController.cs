@@ -2,9 +2,6 @@
 using Models.Item;
 using Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace WebMVC.Controllers
@@ -25,7 +22,10 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ItemCreate model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             var service = CreateService();
 
@@ -67,7 +67,10 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ItemEdit model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             if (model.ItemId != id)
             {
@@ -110,6 +113,9 @@ namespace WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        private ItemService CreateService() => new ItemService(Guid.Parse(User.Identity.GetUserId()));
+        private ItemService CreateService()
+        {
+            return new ItemService(Guid.Parse(User.Identity.GetUserId()));
+        }
     }
 }

@@ -2,9 +2,6 @@
 using Models.Transaction;
 using Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace WebMVC.Controllers
@@ -25,7 +22,10 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TransactionCreate model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             var service = CreateService();
 
@@ -70,7 +70,10 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, TransactionEdit model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             if (model.TransactionId != id)
             {
@@ -113,6 +116,9 @@ namespace WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        private TransactionService CreateService() => new TransactionService(Guid.Parse(User.Identity.GetUserId()));
+        private TransactionService CreateService()
+        {
+            return new TransactionService(Guid.Parse(User.Identity.GetUserId()));
+        }
     }
 }

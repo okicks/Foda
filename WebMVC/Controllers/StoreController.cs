@@ -2,9 +2,6 @@
 using Models.Store;
 using Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace WebMVC.Controllers
@@ -25,7 +22,10 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(StoreCreate model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             var service = CreateService();
 
@@ -69,7 +69,10 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, StoreEdit model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             if (model.StoreId != id)
             {
@@ -112,6 +115,9 @@ namespace WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        private StoreService CreateService() => new StoreService(Guid.Parse(User.Identity.GetUserId()));
+        private StoreService CreateService()
+        {
+            return new StoreService(Guid.Parse(User.Identity.GetUserId()));
+        }
     }
 }
