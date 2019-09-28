@@ -51,10 +51,27 @@ namespace Services
                                     Transaction = model.Transaction,
                                     ItemId = model.ItemId,
                                     Item = model.Item,
-                                    Quantity = model.Quantity,
-                                    OwnerId = _userId
+                                    Quantity = model.Quantity
                                 }
                         );
+
+                return query.ToArray();
+            }
+        }
+
+        public static IEnumerable<TransactionItemListItem> GetTransactionItemsByTransaction(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx.TransactionItems.Where(e => e.TransactionId == id).Select(model => new TransactionItemListItem
+                {
+                    TransactionItemId = model.TransactionItemId,
+                    TransactionId = model.TransactionId,
+                    Transaction = model.Transaction,
+                    ItemId = model.ItemId,
+                    Item = model.Item,
+                    Quantity = model.Quantity
+                });
 
                 return query.ToArray();
             }

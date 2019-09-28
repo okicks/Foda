@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -42,5 +43,8 @@ namespace Models.Transaction
 
         [Required]
         public Guid OwnerId { get; set; }
+
+        [Required]
+        public IEnumerable TransactionItems { get; set; }
     }
 }

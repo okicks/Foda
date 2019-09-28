@@ -81,7 +81,8 @@ namespace Services
                         DeliveryStreet = model.DeliveryStreet,
                         DeliveryCity = model.DeliveryCity,
                         DeliveryState = model.DeliveryState,
-                        DeliveryZip = model.DeliveryZip
+                        DeliveryZip = model.DeliveryZip,
+                        TransactionItems = TransactionItemService.GetTransactionItemsByTransaction(id)
                     };
             }
         }
