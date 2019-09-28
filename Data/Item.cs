@@ -14,9 +14,10 @@ namespace Data
         public int ItemId { get; set; }
 
         [Required]
-        [ForeignKey("Store")]
+        [ForeignKey(nameof(Store))]
         public int StoreId { get; set; }
 
+        [Required]
         public virtual Store Store { get; set; }
 
         [Required]

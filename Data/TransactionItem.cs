@@ -14,15 +14,17 @@ namespace Data
         public int TransactionItemId { get; set; }
 
         [Required]
-        [ForeignKey("Transaction")]
+        [ForeignKey(nameof(Transaction))]
         public int TransactionId { get; set; }
 
+        [Required]
         public virtual Transaction Transaction { get; set; }
 
         [Required]
-        [ForeignKey("Item")]
+        [ForeignKey(nameof(Item))]
         public int ItemId { get; set; }
 
+        [Required]
         public virtual Item Item { get; set; }
 
         [Required]
