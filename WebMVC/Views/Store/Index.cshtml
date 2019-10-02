@@ -29,41 +29,38 @@
         <th>
             @Html.DisplayNameFor(model => model.StorePhoneNumber)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OwnerId)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreStreet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreCity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreZip)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StorePhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OwnerId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StoreId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StoreId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StoreId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        @Html.HiddenFor(modelItem => item.OwnerId)
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreZip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StorePhoneNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StoreId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StoreId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StoreId })
+            </td>
+        </tr>
+    }
 
 </table>

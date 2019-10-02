@@ -32,32 +32,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Store.StoreName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TransactionDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryStreet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryCity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryZip)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TransactionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TransactionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TransactionId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Store.StoreName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryZip)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TransactionId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TransactionId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TransactionId })
+            </td>
+        </tr>
+    }
 
 </table>
