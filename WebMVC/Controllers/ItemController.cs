@@ -15,27 +15,37 @@ namespace WebMVC.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            if (IsAdmin())
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ItemCreate model)
         {
-            if (!ModelState.IsValid)
+            if (IsAdmin())
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var service = CreateService();
+
+                if (service.CreateItem(model))
+                {
+                    TempData["SaveResult"] = "Your Item was created.";
+                    return RedirectToAction("Index");
+                };
+
                 return View(model);
             }
 
-            var service = CreateService();
-
-            if (service.CreateItem(model))
-            {
-                TempData["SaveResult"] = "Your Item was created.";
-                return RedirectToAction("Index");
-            };
-
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Details(int id)
@@ -48,55 +58,70 @@ namespace WebMVC.Controllers
 
         public ActionResult Edit(int id)
         {
-            var service = CreateService();
-            var detail = service.GetItemById(id);
-            var model =
-                new ItemEdit
-                {
-                    ItemId = detail.ItemId,
-                    StoreId = detail.StoreId,
-                    Store = detail.Store,
-                    ItemName = detail.ItemName,
-                    Description = detail.Description,
-                    OwnerId = detail.OwnerId
-                };
-            return View(model);
+            if (IsAdmin())
+            {
+                var service = CreateService();
+                var detail = service.GetItemById(id);
+                var model =
+                    new ItemEdit
+                    {
+                        ItemId = detail.ItemId,
+                        StoreId = detail.StoreId,
+                        Store = detail.Store,
+                        ItemName = detail.ItemName,
+                        Description = detail.Description,
+                        OwnerId = detail.OwnerId
+                    };
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ItemEdit model)
         {
-            if (!ModelState.IsValid)
+            if (IsAdmin())
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                if (model.ItemId != id)
+                {
+                    ModelState.AddModelError("", "Id Mismatch");
+                    return View(model);
+                }
+
+                var service = CreateService();
+
+                if (service.UpdateItem(model))
+                {
+                    TempData["SaveResult"] = "Your Item was updated.";
+                    return RedirectToAction("Index");
+                }
+
+                ModelState.AddModelError("", "Your Item could not be updated.");
                 return View(model);
             }
 
-            if (model.ItemId != id)
-            {
-                ModelState.AddModelError("", "Id Mismatch");
-                return View(model);
-            }
-
-            var service = CreateService();
-
-            if (service.UpdateItem(model))
-            {
-                TempData["SaveResult"] = "Your Item was updated.";
-                return RedirectToAction("Index");
-            }
-
-            ModelState.AddModelError("", "Your Item could not be updated.");
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateService();
-            var model = svc.GetItemById(id);
+            if (IsAdmin())
+            {
+                var svc = CreateService();
+                var model = svc.GetItemById(id);
 
-            return View(model);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -104,11 +129,17 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePost(int id)
         {
-            var service = CreateService();
 
-            service.DeleteItem(id);
+            if (IsAdmin())
+            {
+                var service = CreateService();
 
-            TempData["SaveResult"] = "Your Item was deleted";
+                service.DeleteItem(id);
+
+                TempData["SaveResult"] = "Your Item was deleted";
+
+                return RedirectToAction("Index");
+            }
 
             return RedirectToAction("Index");
         }
@@ -116,6 +147,11 @@ namespace WebMVC.Controllers
         private ItemService CreateService()
         {
             return new ItemService(Guid.Parse(User.Identity.GetUserId()));
+        }
+
+        private bool IsAdmin()
+        {
+            return User.IsInRole("Admin");
         }
     }
 }

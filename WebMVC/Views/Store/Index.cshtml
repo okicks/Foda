@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Models.Store.StoreListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreStreet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreZip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StorePhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreStreet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreZip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StorePhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwnerId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StoreId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StoreId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StoreId })
+        </td>
+    </tr>
+}
+
+</table>

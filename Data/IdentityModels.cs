@@ -44,6 +44,36 @@ namespace Data
 
             modelBuilder.Configurations.Add(new IdentityUserLoginConfiguration()).Add(new IdentityUserRoleConfiguration());
         }
+
+        public System.Data.Entity.DbSet<Models.Transaction.TransactionListItem> TransactionListItems { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Transaction.TransactionCreate> TransactionCreates { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Transaction.TransactionDetail> TransactionDetails { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Transaction.TransactionEdit> TransactionEdits { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Transaction.TransactionDelete> TransactionDeletes { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Store.StoreListItem> StoreListItems { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Store.StoreCreate> StoreCreates { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Store.StoreDetail> StoreDetails { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Store.StoreEdit> StoreEdits { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Store.StoreDelete> StoreDeletes { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Item.ItemListItem> ItemListItems { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Item.ItemCreate> ItemCreates { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Item.ItemDetail> ItemDetails { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Item.ItemEdit> ItemEdits { get; set; }
+
+        public System.Data.Entity.DbSet<Models.Item.ItemDelete> ItemDeletes { get; set; }
     }
 
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>

@@ -3,6 +3,7 @@ using Models.Store;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Identity;
 
 namespace Services
 {
@@ -41,7 +42,7 @@ namespace Services
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
-                    ctx.Stores.Where(e => e.OwnerId == _userId).Select(
+                    ctx.Stores.Select(
                             model =>
                                 new StoreListItem
                                 {
@@ -66,7 +67,7 @@ namespace Services
                 var model =
                     ctx
                         .Stores
-                        .Single(e => e.StoreId == id && e.OwnerId == _userId);
+                        .Single(e => e.StoreId == id);
                 return
                     new StoreDetail
                     {
@@ -88,7 +89,7 @@ namespace Services
                 var entity =
                     ctx
                         .Stores
-                        .Single(e => e.StoreId == model.StoreId && e.OwnerId == _userId);
+                        .Single(e => e.StoreId == model.StoreId);
 
                 entity.StoreId = model.StoreId;
                 entity.StoreName = model.StoreName;
@@ -109,7 +110,7 @@ namespace Services
                 var entity =
                     ctx
                         .Stores
-                        .Single(e => e.StoreId == StoreId && e.OwnerId == _userId);
+                        .Single(e => e.StoreId == StoreId);
 
                 ctx.Stores.Remove(entity);
 

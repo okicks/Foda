@@ -1,0 +1,74 @@
+﻿@model Models.Transaction.TransactionDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TransactionDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Store.StoreName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Store.StoreName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransactionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryStreet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryStreet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TransactionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

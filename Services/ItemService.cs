@@ -39,7 +39,7 @@ namespace Services
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
-                    ctx.Items.Where(e => e.OwnerId == _userId).Select(
+                    ctx.Items.Select(
                             model =>
                                 new ItemListItem
                                 {
@@ -62,7 +62,7 @@ namespace Services
                 var model =
                     ctx
                         .Items
-                        .Single(e => e.ItemId == id && e.OwnerId == _userId);
+                        .Single(e => e.ItemId == id);
                 return
                     new ItemDetail
                     {
@@ -82,7 +82,7 @@ namespace Services
                 var entity =
                     ctx
                         .Items
-                        .Single(e => e.ItemId == model.ItemId && e.OwnerId == _userId);
+                        .Single(e => e.ItemId == model.ItemId);
 
                 entity.ItemId = model.ItemId;
                 entity.StoreId = model.StoreId;
@@ -101,7 +101,7 @@ namespace Services
                 var entity =
                     ctx
                         .Items
-                        .Single(e => e.ItemId == ItemId && e.OwnerId == _userId);
+                        .Single(e => e.ItemId == ItemId);
 
                 ctx.Items.Remove(entity);
 
