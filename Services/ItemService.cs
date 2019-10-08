@@ -34,12 +34,12 @@ namespace Services
             }
         }
 
-        public IEnumerable<ItemListItem> GetItems()
+        public IEnumerable<ItemListItem> GetItems(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
-                    ctx.Items.Select(
+                    ctx.Items.Where(e => e.StoreId == id).Select(
                             model =>
                                 new ItemListItem
                                 {

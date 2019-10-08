@@ -10,7 +10,12 @@ namespace WebMVC.Controllers
     {
         public ActionResult Index()
         {
-            return View(CreateService().GetStores());
+            var service = CreateService();
+
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
+            return View(service.GetStores());
         }
 
         public ActionResult Create()
@@ -36,6 +41,9 @@ namespace WebMVC.Controllers
 
                 var service = CreateService();
 
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
                 if (service.CreateStore(model))
                 {
                     TempData["SaveResult"] = "Your Store was created.";
@@ -50,10 +58,7 @@ namespace WebMVC.Controllers
 
         public ActionResult Details(int id)
         {
-            var svc = CreateService();
-            var model = svc.GetStoreById(id);
-
-            return View(model);
+            return RedirectToAction("Index", "Item", new { id });
         }
 
         public ActionResult Edit(int id)
@@ -61,6 +66,10 @@ namespace WebMVC.Controllers
             if (IsAdmin())
             {
                 var service = CreateService();
+
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
                 var detail = service.GetStoreById(id);
                 var model =
                     new StoreEdit
@@ -99,6 +108,9 @@ namespace WebMVC.Controllers
 
                 var service = CreateService();
 
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
                 if (service.UpdateStore(model))
                 {
                     TempData["SaveResult"] = "Your Store was updated.";
@@ -117,8 +129,12 @@ namespace WebMVC.Controllers
         {
             if (IsAdmin())
             {
-                var svc = CreateService();
-                var model = svc.GetStoreById(id);
+                var service = CreateService();
+
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
+                var model = service.GetStoreById(id);
 
                 return View(model);
             }
@@ -135,6 +151,9 @@ namespace WebMVC.Controllers
             {
                 var service = CreateService();
 
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
                 service.DeleteStore(id);
 
                 TempData["SaveResult"] = "Your Store was deleted";
@@ -147,7 +166,14 @@ namespace WebMVC.Controllers
 
         private StoreService CreateService()
         {
-            return new StoreService(Guid.Parse(User.Identity.GetUserId()));
+            try
+            {
+                return new StoreService(Guid.Parse(User.Identity.GetUserId()));
+            }
+            catch (System.ArgumentNullException)
+            {
+                return null;
+            }
         }
         private bool IsAdmin()
         {

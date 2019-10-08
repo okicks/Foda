@@ -24,6 +24,6 @@ namespace Models.Item
         public string Description { get; set; }
 
         [Required]
-        public Guid OwnerId { get; set; }
+        public float Price { get; set; }
     }
 }

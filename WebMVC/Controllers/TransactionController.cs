@@ -10,7 +10,12 @@ namespace WebMVC.Controllers
     {
         public ActionResult Index()
         {
-            return View(CreateService().GetTransactions());
+            var service = CreateService();
+
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
+            return View(service.GetTransactions());
         }
 
         public ActionResult Create()
@@ -29,6 +34,9 @@ namespace WebMVC.Controllers
 
             var service = CreateService();
 
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
             if (service.CreateTransaction(model))
             {
                 TempData["SaveResult"] = "Your Transaction was created.";
@@ -40,8 +48,12 @@ namespace WebMVC.Controllers
 
         public ActionResult Details(int id)
         {
-            var svc = CreateService();
-            var model = svc.GetTransactionById(id);
+            var service = CreateService();
+
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
+            var model = service.GetTransactionById(id);
 
             return View(model);
         }
@@ -49,6 +61,10 @@ namespace WebMVC.Controllers
         public ActionResult Edit(int id)
         {
             var service = CreateService();
+
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
             var detail = service.GetTransactionById(id);
             var model =
                 new TransactionEdit
@@ -83,6 +99,9 @@ namespace WebMVC.Controllers
 
             var service = CreateService();
 
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
             if (service.UpdateTransaction(model))
             {
                 TempData["SaveResult"] = "Your Transaction was updated.";
@@ -96,8 +115,12 @@ namespace WebMVC.Controllers
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateService();
-            var model = svc.GetTransactionById(id);
+            var service = CreateService();
+
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
+            var model = service.GetTransactionById(id);
 
             return View(model);
         }
@@ -109,6 +132,9 @@ namespace WebMVC.Controllers
         {
             var service = CreateService();
 
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
             service.DeleteTransaction(id);
 
             TempData["SaveResult"] = "Your Transaction was deleted";
@@ -118,7 +144,14 @@ namespace WebMVC.Controllers
 
         private TransactionService CreateService()
         {
-            return new TransactionService(Guid.Parse(User.Identity.GetUserId()));
+            try
+            {
+                return new TransactionService(Guid.Parse(User.Identity.GetUserId()));
+            }
+            catch (System.ArgumentNullException)
+            {
+                return null;
+            }
         }
     }
 }

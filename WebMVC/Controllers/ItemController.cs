@@ -8,9 +8,14 @@ namespace WebMVC.Controllers
 {
     public class ItemController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View(CreateService().GetItems());
+            var service = CreateService();
+
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
+            return View(service.GetItems(id));
         }
 
         public ActionResult Create()
@@ -36,6 +41,9 @@ namespace WebMVC.Controllers
 
                 var service = CreateService();
 
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
                 if (service.CreateItem(model))
                 {
                     TempData["SaveResult"] = "Your Item was created.";
@@ -50,8 +58,12 @@ namespace WebMVC.Controllers
 
         public ActionResult Details(int id)
         {
-            var svc = CreateService();
-            var model = svc.GetItemById(id);
+            var service = CreateService();
+
+            if (service == null)
+                return RedirectToAction("Login", "Account");
+
+            var model = service.GetItemById(id);
 
             return View(model);
         }
@@ -61,6 +73,10 @@ namespace WebMVC.Controllers
             if (IsAdmin())
             {
                 var service = CreateService();
+
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
                 var detail = service.GetItemById(id);
                 var model =
                     new ItemEdit
@@ -97,6 +113,9 @@ namespace WebMVC.Controllers
 
                 var service = CreateService();
 
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
                 if (service.UpdateItem(model))
                 {
                     TempData["SaveResult"] = "Your Item was updated.";
@@ -115,8 +134,12 @@ namespace WebMVC.Controllers
         {
             if (IsAdmin())
             {
-                var svc = CreateService();
-                var model = svc.GetItemById(id);
+                var service = CreateService();
+
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
+                var model = service.GetItemById(id);
 
                 return View(model);
             }
@@ -134,6 +157,9 @@ namespace WebMVC.Controllers
             {
                 var service = CreateService();
 
+                if (service == null)
+                    return RedirectToAction("Login", "Account");
+
                 service.DeleteItem(id);
 
                 TempData["SaveResult"] = "Your Item was deleted";
@@ -146,7 +172,14 @@ namespace WebMVC.Controllers
 
         private ItemService CreateService()
         {
-            return new ItemService(Guid.Parse(User.Identity.GetUserId()));
+            try
+            {
+                return new ItemService(Guid.Parse(User.Identity.GetUserId()));
+            }
+            catch (System.ArgumentNullException)
+            {
+                return null;
+            }
         }
 
         private bool IsAdmin()

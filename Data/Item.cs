@@ -24,6 +24,9 @@ namespace Data
         public string Description { get; set; }
 
         [Required]
+        public float Price { get; set; }
+
+        [Required]
         public Guid OwnerId { get; set; }
     }
 }
