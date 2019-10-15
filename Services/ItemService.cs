@@ -21,9 +21,9 @@ namespace Services
             {
                 ItemId = model.ItemId,
                 StoreId = model.StoreId,
-                Store = model.Store,
                 ItemName = model.ItemName,
                 Description = model.Description,
+                Price = model.Price,
                 OwnerId = _userId
             };
 
@@ -45,8 +45,8 @@ namespace Services
                                 {
                                     ItemId = model.ItemId,
                                     StoreId = model.StoreId,
-                                    Store = model.Store,
                                     ItemName = model.ItemName,
+                                    Price = model.Price,
                                     Description = model.Description
                                 }
                         );
@@ -55,7 +55,7 @@ namespace Services
             }
         }
 
-        public ItemDetail GetItemById(int id)
+        public ItemDetail GetItemByIdDetail(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -68,8 +68,28 @@ namespace Services
                     {
                         ItemId = model.ItemId,
                         StoreId = model.StoreId,
-                        Store = model.Store,
                         ItemName = model.ItemName,
+                        Price = model.Price,
+                        Description = model.Description
+                    };
+            }
+        }
+
+        public ItemDelete GetItemByIdDelete(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var model =
+                    ctx
+                        .Items
+                        .Single(e => e.ItemId == id);
+                return
+                    new ItemDelete
+                    {
+                        ItemId = model.ItemId,
+                        StoreId = model.StoreId,
+                        ItemName = model.ItemName,
+                        Price = model.Price,
                         Description = model.Description
                     };
             }
@@ -86,8 +106,8 @@ namespace Services
 
                 entity.ItemId = model.ItemId;
                 entity.StoreId = model.StoreId;
-                entity.Store = model.Store;
                 entity.ItemName = model.ItemName;
+                entity.Price = model.Price;
                 entity.Description = model.Description;
 
                 return ctx.SaveChanges() == 1;

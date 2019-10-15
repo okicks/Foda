@@ -70,7 +70,7 @@ namespace WebMVC.Controllers
                 if (service == null)
                     return RedirectToAction("Login", "Account");
 
-                var detail = service.GetStoreById(id);
+                var detail = service.GetStoreByIdDetail(id);
                 var model =
                     new StoreEdit
                     {
@@ -134,7 +134,7 @@ namespace WebMVC.Controllers
                 if (service == null)
                     return RedirectToAction("Login", "Account");
 
-                var model = service.GetStoreById(id);
+                var model = service.GetStoreByIdDelete(id);
 
                 return View(model);
             }

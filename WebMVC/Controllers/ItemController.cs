@@ -8,6 +8,8 @@ namespace WebMVC.Controllers
 {
     public class ItemController : Controller
     {
+        private int _id;
+
         public ActionResult Index(int id)
         {
             var service = CreateService();
@@ -15,17 +17,25 @@ namespace WebMVC.Controllers
             if (service == null)
                 return RedirectToAction("Login", "Account");
 
+            ViewBag.StoreId = id;
+            _id = id;
+
             return View(service.GetItems(id));
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             if (IsAdmin())
             {
-                return View();
+                var model = new ItemCreate
+                {
+                    StoreId = id
+                };
+
+                return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id });
         }
 
         [HttpPost]
@@ -47,13 +57,13 @@ namespace WebMVC.Controllers
                 if (service.CreateItem(model))
                 {
                     TempData["SaveResult"] = "Your Item was created.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { id = model.StoreId });
                 };
 
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = model.StoreId });
         }
 
         public ActionResult Details(int id)
@@ -63,7 +73,7 @@ namespace WebMVC.Controllers
             if (service == null)
                 return RedirectToAction("Login", "Account");
 
-            var model = service.GetItemById(id);
+            var model = service.GetItemByIdDetail(id);
 
             return View(model);
         }
@@ -77,13 +87,12 @@ namespace WebMVC.Controllers
                 if (service == null)
                     return RedirectToAction("Login", "Account");
 
-                var detail = service.GetItemById(id);
+                var detail = service.GetItemByIdDetail(id);
                 var model =
                     new ItemEdit
                     {
                         ItemId = detail.ItemId,
                         StoreId = detail.StoreId,
-                        Store = detail.Store,
                         ItemName = detail.ItemName,
                         Description = detail.Description,
                         OwnerId = detail.OwnerId
@@ -91,7 +100,7 @@ namespace WebMVC.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = _id });
         }
 
         [HttpPost]
@@ -119,14 +128,14 @@ namespace WebMVC.Controllers
                 if (service.UpdateItem(model))
                 {
                     TempData["SaveResult"] = "Your Item was updated.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { id = _id });
                 }
 
                 ModelState.AddModelError("", "Your Item could not be updated.");
                 return View(model);
             }
-
-            return RedirectToAction("Index");
+            
+            return RedirectToAction("Index", new { id = _id });
         }
 
         [ActionName("Delete")]
@@ -139,12 +148,12 @@ namespace WebMVC.Controllers
                 if (service == null)
                     return RedirectToAction("Login", "Account");
 
-                var model = service.GetItemById(id);
+                var model = service.GetItemByIdDelete(id);
 
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = _id });
         }
 
         [HttpPost]
@@ -164,10 +173,10 @@ namespace WebMVC.Controllers
 
                 TempData["SaveResult"] = "Your Item was deleted";
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = _id });
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = _id });
         }
 
         private ItemService CreateService()

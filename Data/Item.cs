@@ -13,7 +13,6 @@ namespace Data
         [ForeignKey(nameof(Store))]
         public int StoreId { get; set; }
 
-        [Required]
         public virtual Store Store { get; set; }
 
         [Required]

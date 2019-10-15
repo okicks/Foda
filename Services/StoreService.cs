@@ -60,7 +60,7 @@ namespace Services
             }
         }
 
-        public StoreDetail GetStoreById(int id)
+        public StoreDetail GetStoreByIdDetail(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -70,6 +70,28 @@ namespace Services
                         .Single(e => e.StoreId == id);
                 return
                     new StoreDetail
+                    {
+                        StoreId = model.StoreId,
+                        StoreName = model.StoreName,
+                        StoreStreet = model.StoreStreet,
+                        StoreCity = model.StoreCity,
+                        StoreState = model.StoreState,
+                        StoreZip = model.StoreZip,
+                        StorePhoneNumber = model.StorePhoneNumber
+                    };
+            }
+        }
+
+        public StoreDelete GetStoreByIdDelete(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var model =
+                    ctx
+                        .Stores
+                        .Single(e => e.StoreId == id);
+                return
+                    new StoreDelete
                     {
                         StoreId = model.StoreId,
                         StoreName = model.StoreName,
@@ -103,19 +125,25 @@ namespace Services
             }
         }
 
-        public bool DeleteStore(int StoreId)
+        public bool DeleteStore(int storeId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                         .Stores
-                        .Single(e => e.StoreId == StoreId);
+                        .Single(e => e.StoreId == storeId);
 
                 ctx.Stores.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }
+        }
+
+        public static Store GetStoreVarById(int storeId)
+        {
+            using (var ctx = new ApplicationDbContext())
+                return ctx.Stores.Single(e => e.StoreId == storeId);
         }
 
         public ApplicationDbContext GetDb()
