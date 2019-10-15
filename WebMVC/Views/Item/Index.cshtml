@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Store.StoreName)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.ItemName)
         </th>
         <th>
@@ -31,9 +28,6 @@
         @Html.HiddenFor(modelItem => item.OwnerId)
 
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Store.StoreName)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ItemName)
             </td>

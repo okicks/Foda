@@ -25,6 +25,9 @@ namespace WebMVC.Controllers
 
         public ActionResult Create(int id)
         {
+
+            ViewBag.StoreId = _id;
+
             if (IsAdmin())
             {
                 var model = new ItemCreate
@@ -42,6 +45,8 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ItemCreate model)
         {
+            ViewBag.StoreId = _id;
+
             if (IsAdmin())
             {
                 if (!ModelState.IsValid)
@@ -68,6 +73,8 @@ namespace WebMVC.Controllers
 
         public ActionResult Details(int id)
         {
+            ViewBag.StoreId = _id;
+
             var service = CreateService();
 
             if (service == null)
@@ -80,6 +87,8 @@ namespace WebMVC.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.StoreId = _id;
+
             if (IsAdmin())
             {
                 var service = CreateService();
@@ -107,6 +116,8 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ItemEdit model)
         {
+            ViewBag.StoreId = _id;
+
             if (IsAdmin())
             {
                 if (!ModelState.IsValid)
@@ -141,6 +152,8 @@ namespace WebMVC.Controllers
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
+            ViewBag.StoreId = _id;
+
             if (IsAdmin())
             {
                 var service = CreateService();
@@ -161,6 +174,7 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePost(int id)
         {
+            ViewBag.StoreId = _id;
 
             if (IsAdmin())
             {

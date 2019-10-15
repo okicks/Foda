@@ -14,9 +14,6 @@ namespace Models.Item
         public int StoreId { get; set; }
 
         [Required]
-        public virtual Data.Store Store { get; set; }
-
-        [Required]
         [Display(Name = "Name")]
         public string ItemName { get; set; }
 
