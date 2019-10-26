@@ -15,7 +15,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             ViewBag.StoreId = id;
             _id = id;
@@ -57,7 +59,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 if (service.CreateItem(model))
                 {
@@ -78,7 +82,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             var model = service.GetItemByIdDetail(id);
 
@@ -94,7 +100,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 var detail = service.GetItemByIdDetail(id);
                 var model =
@@ -134,7 +142,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 if (service.UpdateItem(model))
                 {
@@ -145,7 +155,7 @@ namespace WebMVC.Controllers
                 ModelState.AddModelError("", "Your Item could not be updated.");
                 return View(model);
             }
-            
+
             return RedirectToAction("Index", new { id = _id });
         }
 
@@ -159,7 +169,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 var model = service.GetItemByIdDelete(id);
 
@@ -181,7 +193,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 service.DeleteItem(id);
 

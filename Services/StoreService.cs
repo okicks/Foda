@@ -3,7 +3,6 @@ using Models.Store;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Identity;
 
 namespace Services
 {
@@ -143,7 +142,9 @@ namespace Services
         public static Store GetStoreVarById(int storeId)
         {
             using (var ctx = new ApplicationDbContext())
+            {
                 return ctx.Stores.Single(e => e.StoreId == storeId);
+            }
         }
 
         public ApplicationDbContext GetDb()

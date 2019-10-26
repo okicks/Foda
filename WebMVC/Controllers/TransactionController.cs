@@ -13,7 +13,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             return View(service.GetTransactions());
         }
@@ -35,7 +37,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             if (service.CreateTransaction(model))
             {
@@ -51,7 +55,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             var model = service.GetTransactionById(id);
 
@@ -63,7 +69,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             var detail = service.GetTransactionById(id);
             var model =
@@ -100,7 +108,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             if (service.UpdateTransaction(model))
             {
@@ -118,7 +128,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             var model = service.GetTransactionById(id);
 
@@ -133,7 +145,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             service.DeleteTransaction(id);
 

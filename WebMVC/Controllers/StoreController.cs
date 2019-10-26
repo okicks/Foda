@@ -13,7 +13,9 @@ namespace WebMVC.Controllers
             var service = CreateService();
 
             if (service == null)
+            {
                 return RedirectToAction("Login", "Account");
+            }
 
             return View(service.GetStores());
         }
@@ -42,7 +44,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 if (service.CreateStore(model))
                 {
@@ -68,7 +72,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 var detail = service.GetStoreByIdDetail(id);
                 var model =
@@ -109,7 +115,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 if (service.UpdateStore(model))
                 {
@@ -132,7 +140,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 var model = service.GetStoreByIdDelete(id);
 
@@ -152,7 +162,9 @@ namespace WebMVC.Controllers
                 var service = CreateService();
 
                 if (service == null)
+                {
                     return RedirectToAction("Login", "Account");
+                }
 
                 service.DeleteStore(id);
 
